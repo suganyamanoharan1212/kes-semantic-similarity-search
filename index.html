@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KES &mdash; Semantic Similarity Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-mark">KES</div>
+    <div class="masthead-text">
+      <h1>Semantic Similarity Search</h1>
+      <p class="masthead-sub">Manuscript retrieval desk &mdash; Word2Vec &amp; cosine similarity</p>
+    </div>
+    <div class="masthead-status" id="status-pill">checking index&hellip;</div>
+  </div>
+</div>
+
+<main>
+
+  <section class="panel" id="build-panel">
+    <div class="panel-head">
+      <span class="eyebrow">Intake</span>
+      <h2>Build the search index</h2>
+    </div>
+    <p class="panel-copy">
+      Upload the manuscript spreadsheet (columns: <code>document_id</code>,
+      <code>title</code>, <code>raw_text</code>, <code>keywords</code>,
+      <code>category</code>). This trains a fresh Word2Vec model and saves
+      it to <code>./data</code> &mdash; you only need to do it again when the
+      dataset changes.
+    </p>
+    <form id="build-form">
+      <label class="file-drop" id="file-drop">
+        <input type="file" id="file-input" name="file" accept=".xlsx,.xls" hidden>
+        <span id="file-drop-label">Choose spreadsheet&hellip;</span>
+      </label>
+      <button type="submit" id="build-btn">Build index</button>
+    </form>
+    <div class="build-log" id="build-log" hidden></div>
+  </section>
+
+  <section class="panel" id="search-panel">
+    <div class="panel-head">
+      <span class="eyebrow">Reading room</span>
+      <h2>Search the archive</h2>
+    </div>
+
+    <form id="search-form">
+      <input type="text" id="query-input" placeholder="e.g. how are manuscripts reviewed by editors?" autocomplete="off">
+      <div class="search-controls">
+        <label>Results
+          <input type="number" id="topk-input" value="5" min="1" max="50">
+        </label>
+        <label>Min. similarity
+          <input type="number" id="threshold-input" value="0" min="0" max="100" step="1"> %
+        </label>
+        <button type="submit" id="search-btn">Search</button>
+      </div>
+    </form>
+
+    <div class="tokens-line" id="tokens-line" hidden></div>
+    <div class="results" id="results"></div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Local Flask app &middot; index files live under <code>/data</code></span>
+</footer>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
