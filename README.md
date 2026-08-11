@@ -2,7 +2,55 @@
 
 This is a local Flask web app version of the semantic search pipeline
 from your Colab notebook (NLTK preprocessing → Word2Vec → cosine
-similarity search). No more manual `files.upload()` steps — you upload
+similarity search). ## Project Overview
+
+KES Semantic Similarity Search is an NLP-based document retrieval web application built with Python and Flask.
+
+The system converts document text into semantic representations using Word2Vec and compares a user's query with document vectors using cosine similarity. Results are ranked from the most semantically relevant document to the least relevant.
+
+## NLP Pipeline
+
+Raw Excel Dataset
+→ Text Preprocessing
+→ Tokenization & Lemmatization
+→ Word2Vec Training
+→ Document Embeddings
+→ Cosine Similarity
+→ Ranked Search Results
+
+## Technologies Used
+
+- Python
+- Flask
+- NLTK
+- Gensim Word2Vec
+- NumPy
+- Pandas
+- Scikit-learn
+- HTML/CSS
+
+## Key Features
+
+- Upload raw Excel manuscript data
+- NLP text preprocessing
+- Word2Vec model training
+- Document-level emb- eddings
+- Semantic similarity search
+- Cosine similarity scoring
+- Ranked search results
+- Flask-based web interface
+
+## Example
+
+User Query:
+
+"How are manuscripts reviewed by editors?"
+
+The system compares the query with indexed documents and returns the most semantically similar documents with similarity scores.
+
+## Project Result
+
+The application successfully builds a searchable semantic index and returns ranked results through a local Flask web application.No more manual `files.upload()` steps — you upload
 your spreadsheet once through the browser, and it stays indexed on disk.
 
 ## 1. Open in VS Code
